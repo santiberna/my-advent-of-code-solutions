@@ -68,7 +68,7 @@ void GetPossibilities(int64_t& out, int64_t target, const std::vector<int64_t>& 
     }
 }
 
-REGISTER_CHALLENGE(Y2024_C7_Operators, "input/Y2024/C7.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_C7_Operators, "input/Y2024/C7.txt")
 {
     std::vector<Values> equations {};
 

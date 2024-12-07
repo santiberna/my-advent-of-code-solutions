@@ -3,7 +3,7 @@
 #include <string>
 
 // This challenge is disabled because it takes too long
-REGISTER_CHALLENGE(Y2015_C4_HashingBitcoin, "ckczppom")
+REGISTER_CHALLENGE_DISABLED(Y2015_C4_HashingBitcoin, "ckczppom")
 {
     MD5_String base_key { input };
     size_t base_key_size = base_key.GetStringLength();

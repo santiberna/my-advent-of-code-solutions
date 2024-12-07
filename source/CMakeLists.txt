@@ -5,7 +5,7 @@ target_include_directories(Challenges PUBLIC ".")
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS
     "Utility/*.cpp" "Utility/*.hpp"
     "common.cpp" "common.hpp"
-    #"Y2015/*.cpp" 
+    "Y2015/*.cpp" 
     "Y2016/*.cpp" 
     "Y2024/*.cpp" 
     "main.cpp"

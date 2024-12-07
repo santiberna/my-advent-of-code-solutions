@@ -134,7 +134,7 @@ bool Traverse(Array2D<uint8_t>& path, const Array2D<uint8_t>& obstacles, glm::iv
     return false;
 }
 
-REGISTER_CHALLENGE(Y2024_C6_GuardTracking, "input/Y2024/C6.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_C6_GuardTracking, "input/Y2024/C6.txt")
 {
     Array2D<uint8_t> obstacles {};
     Array2D<uint8_t> path {};

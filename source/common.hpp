@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <cstdint>
-#include <unordered_map>
+#include <map>
 
 using Result = std::pair<int64_t, int64_t>; // Most challenges have a big number as an answer, and two parts
 using Input = std::string; // Most challenges have a path or string as input
@@ -26,7 +26,7 @@ private:
     ChallengeRunner() = default;
 
     using InputChallengePair = std::pair<Input, Challenge*>;
-    std::unordered_map<std::string, InputChallengePair> challenges_registered {};
+    std::map<std::string, InputChallengePair> challenges_registered {};
 };
 
 #define STRINGIFY(identifier) #identifier
