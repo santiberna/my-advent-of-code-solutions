@@ -10,6 +10,7 @@ class Array2D
 public:
     Array2D() = default;
     Array2D(size_t width, size_t height);
+    Array2D(size_t width, size_t height, const T& init);
     size_t GetWidth() const { return width; }
     size_t GetHeight() const { return height; }
 
@@ -20,6 +21,8 @@ public:
     const T* operator()(size_t i, size_t j) const;
     T* operator()(size_t i, size_t j);
 
+    T GetOr(size_t i, size_t j, const T& val) const;
+
 private:
     std::vector<T> data;
     size_t width {};
@@ -29,6 +32,14 @@ private:
 template <typename T>
 inline Array2D<T>::Array2D(size_t width, size_t height)
     : data(width * height)
+    , width(width)
+    , height(height)
+{
+}
+
+template <typename T>
+inline Array2D<T>::Array2D(size_t width, size_t height, const T& init)
+    : data(width * height, init)
     , width(width)
     , height(height)
 {
@@ -48,6 +59,16 @@ inline T* Array2D<T>::operator()(size_t i, size_t j)
     if (i >= width || j >= height)
         return nullptr;
     return &data[j * width + i];
+}
+
+template <typename T>
+inline T Array2D<T>::GetOr(size_t i, size_t j, const T& val) const
+{
+    if (auto p = this->operator()(i, j))
+    {
+        return *p;
+    }
+    return val;
 }
 
 template <typename T>
