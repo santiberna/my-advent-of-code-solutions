@@ -54,3 +54,8 @@ struct hash<glm::ivec2>
 };
 
 }
+
+namespace glm
+{
+using lvec2 = glm::vec<2, int64_t>;
+}

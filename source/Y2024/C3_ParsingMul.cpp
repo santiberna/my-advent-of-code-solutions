@@ -6,7 +6,7 @@
 #include <string_view>
 #include <vector>
 
-REGISTER_CHALLENGE(Y2024_C3_ParsingMul, "input/Y2024/C3.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_C3_ParsingMul, "input/Y2024/C3.txt")
 {
     int64_t answer1 {}, answer2 {};
 

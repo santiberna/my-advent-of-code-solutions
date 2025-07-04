@@ -35,7 +35,7 @@ void print(std::vector<int32_t>& v)
     std::cout << std::endl;
 }
 
-REGISTER_CHALLENGE(Y2024_C9, "input/Y2024/C9.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_C9, "input/Y2024/C9.txt")
 {
     std::string compressed {};
 

@@ -4,7 +4,7 @@
 #include <Utility/Log.hpp>
 #include <unordered_set>
 
-REGISTER_CHALLENGE(Y2024_C5_PageDependencies, "input/Y2024/C5.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_C5_PageDependencies, "input/Y2024/C5.txt")
 {
     std::unordered_map<int64_t, std::unordered_set<int64_t>> page_dependencies {};
     std::vector<std::vector<int64_t>> pages_instructions {};

@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <vector>
 
-REGISTER_CHALLENGE(Y2024_C1_SortLocations, "input/Y2024/C1.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_C1_SortLocations, "input/Y2024/C1.txt")
 {
     int64_t answer1 {}, answer2 {};
 

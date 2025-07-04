@@ -5,7 +5,7 @@
 #include <Utility/TextHelpers.hpp>
 #include <Utility/Log.hpp>
 
-REGISTER_CHALLENGE(Y2024_C4_MatchXMAS, "input/Y2024/C4.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_C4_MatchXMAS, "input/Y2024/C4.txt")
 {
     int64_t answer1 {};
     int64_t answer2 {};

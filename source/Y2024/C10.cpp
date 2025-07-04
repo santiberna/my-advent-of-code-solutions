@@ -35,7 +35,7 @@ void EvaluatePathRecursive(int64_t& out, glm::ivec2 position, Array2D<int>& grid
     }
 }
 
-REGISTER_CHALLENGE(Y2024_CA, "input/Y2024/C10.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_CA, "input/Y2024/C10.txt")
 {
     Array2D<int> grid {};
 

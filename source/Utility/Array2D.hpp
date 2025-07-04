@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstdint>
 #include <optional>
+#include <iostream>
 
 template <typename T>
 class Array2D
@@ -23,11 +24,26 @@ public:
 
     T GetOr(size_t i, size_t j, const T& val) const;
 
+    void Print() const;
+
 private:
     std::vector<T> data;
     size_t width {};
     size_t height {};
 };
+
+template <typename T>
+inline void Array2D<T>::Print() const
+{
+    for (size_t j = 0; j < GetHeight(); j++)
+    {
+        for (size_t i = 0; i < GetWidth(); i++)
+        {
+            std::cout << *this->operator()(i, j);
+        }
+        std::cout << '\n';
+    }
+}
 
 template <typename T>
 inline Array2D<T>::Array2D(size_t width, size_t height)

@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <vector>
 
-REGISTER_CHALLENGE(Y2024_C2_SafeReports, "input/Y2024/C2.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_C2_SafeReports, "input/Y2024/C2.txt")
 {
     int64_t answer1 {}, answer2 {};
 

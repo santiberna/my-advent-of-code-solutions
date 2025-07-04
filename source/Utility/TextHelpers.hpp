@@ -1,4 +1,6 @@
 #pragma once
+#include "Utility/Array2D.hpp"
+#include <istream>
 #include <optional>
 #include <filesystem>
 #include <fstream>
@@ -34,4 +36,5 @@ std::optional<std::pair<T, ptrdiff_t>> ParseNumber(std::string_view str);
 template <typename T>
 std::vector<T> ParseAllNumbers(const std::string& str);
 
+Array2D<char> StreamToGrid(std::istream& stream);
 }

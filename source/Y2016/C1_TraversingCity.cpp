@@ -3,21 +3,24 @@
 #include <common.hpp>
 #include <Utility/TextHelpers.hpp>
 #include <Utility/Math.hpp>
+#include <numeric>
 #include <unordered_set>
 #include <vector>
 
-REGISTER_CHALLENGE(Y2016_C1_Stairs, "input/Y2016/C1.txt")
+REGISTER_CHALLENGE_DISABLED(Y2016_C1_Stairs, "input/Y2016/C1.txt")
 {
-    glm::ivec2 pos { 0, 0 };
-    glm::ivec2 dir { 0, 1 };
+    struct Delta
+    {
+        glm::ivec2 dir {};
+        int scale {};
+    };
 
-    std::unordered_set<glm::ivec2> visited {};
-    bool check_repeat = true;
-    int64_t answer1 {}, answer2 {};
+    std::vector<Delta> deltas {};
 
     if (auto stream = TextHelpers::OpenFileReadStream(input))
     {
         auto string = TextHelpers::StreamToString(stream.value());
+        glm::ivec2 dir { 0, 1 };
 
         for (size_t i = 0; i < string.size(); i++)
         {
@@ -40,21 +43,41 @@ REGISTER_CHALLENGE(Y2016_C1_Stairs, "input/Y2016/C1.txt")
 
             if (auto num = TextHelpers::ParseNumber<int>({ string.begin() + i + 1, string.end() }))
             {
-                pos += dir * num->first;
-
-                if (check_repeat && visited.contains(pos))
-                {
-                    answer2 = pos.x + pos.y;
-                    check_repeat = false;
-                }
-
-                visited.emplace(pos);
-                i += num->second;
+                deltas.emplace_back(dir, num->first);
             }
         }
     }
 
-    answer1 = pos.x + pos.y;
+    int64_t answer1 {}, answer2 {};
+
+    {
+        glm::ivec2 accum = {};
+
+        for (auto d : deltas)
+        {
+            accum += d.dir * d.scale;
+        }
+        answer1 = accum.x + accum.y;
+    }
+
+    std::unordered_set<glm::ivec2> places_traversed;
+    glm::ivec2 accum = {};
+
+    for (auto d : deltas)
+    {
+        for (int i = 0; i < d.scale; i++)
+        {
+            auto result = places_traversed.emplace(accum);
+
+            if (!result.second)
+            {
+                answer2 = accum.x + accum.y;
+                break;
+            }
+
+            accum += d.dir;
+        }
+    }
 
     return { answer1, answer2 };
 }

@@ -9,7 +9,7 @@
 #include <unordered_map>
 #include <vector>
 
-REGISTER_CHALLENGE(Y2024_C8, "input/Y2024/C8.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_C8, "input/Y2024/C8.txt")
 {
     size_t width {}, height {};
     std::vector<std::string> grid {};

@@ -1,4 +1,5 @@
 #include "TextHelpers.hpp"
+#include "Utility/Array2D.hpp"
 #include <cstddef>
 #include <cstdint>
 #include <string_view>
@@ -97,6 +98,26 @@ std::optional<std::pair<T, ptrdiff_t>> TextHelpers::ParseNumber(std::string_view
     {
         return std::nullopt;
     }
+}
+
+Array2D<char> TextHelpers::StreamToGrid(std::istream& stream)
+{
+    auto lines = SplitStreamIntoLines(stream);
+
+    size_t width = lines.front().size();
+    size_t height = lines.size();
+
+    Array2D<char> out { width, height };
+
+    for (size_t j = 0; j < height; j++)
+    {
+        for (size_t i = 0; i < width; i++)
+        {
+            *out(i, j) = lines[j][i];
+        }
+    }
+
+    return out;
 }
 
 #define INSTANTIATE_PARSE_NUMBER(T) \

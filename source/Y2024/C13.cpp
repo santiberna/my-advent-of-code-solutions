@@ -12,12 +12,9 @@
 #include <numeric>
 #include <optional>
 #include <vector>
+#include <Utility/Math.hpp>
 
 // 10000000000000
-namespace glm
-{
-using lvec2 = glm::vec<2, int64_t>;
-}
 
 struct Game
 {
@@ -98,7 +95,7 @@ std::optional<int64_t> GetLeastTokens(const std::vector<glm::lvec2>& game)
     return min;
 }
 
-REGISTER_CHALLENGE(Y2024_CD, "input/Y2024/C13.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_CD, "input/Y2024/C13.txt")
 {
     std::vector<Game> games {};
 

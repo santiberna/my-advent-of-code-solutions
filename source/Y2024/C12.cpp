@@ -244,7 +244,7 @@ int64_t EvalRegionDiscount(const Array2D<char>& grid, const std::vector<glm::ive
     return horizontal_sides * 2 * spots.size();
 }
 
-REGISTER_CHALLENGE(Y2024_CC, "input/Y2024/C12.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_CC, "input/Y2024/C12.txt")
 {
     Array2D<char> grid {};
 
