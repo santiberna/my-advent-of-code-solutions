@@ -1,12 +1,11 @@
-#include "Utility/Log.hpp"
 #include "glm/fwd.hpp"
-#include <Utility/Math.hpp>
+#include <utility/math.hpp>
 #include <array>
 #include <cassert>
 #include <glm/glm.hpp>
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Array2D.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+#include <utility/array_2D.hpp>
 #include <ostream>
 #include <queue>
 #include <iostream>
@@ -240,7 +239,6 @@ int64_t EvalRegionDiscount(const Array2D<char>& grid, const std::vector<glm::ive
         }
     }
 
-    Log::Debug("{}: {}", match, horizontal_sides * 2);
     return horizontal_sides * 2 * spots.size();
 }
 

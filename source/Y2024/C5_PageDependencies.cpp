@@ -1,7 +1,7 @@
 #include <glm/glm.hpp>
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Log.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+#include <utility/log.hpp>
 #include <unordered_set>
 
 REGISTER_CHALLENGE_DISABLED(Y2024_C5_PageDependencies, "input/Y2024/C5.txt")

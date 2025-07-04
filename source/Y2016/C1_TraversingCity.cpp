@@ -1,11 +1,8 @@
-#include "glm/ext/vector_int2.hpp"
 #include <glm/vec2.hpp>
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Math.hpp>
-#include <numeric>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+#include <utility/math.hpp>
 #include <unordered_set>
-#include <vector>
 
 REGISTER_CHALLENGE_DISABLED(Y2016_C1_Stairs, "input/Y2016/C1.txt")
 {

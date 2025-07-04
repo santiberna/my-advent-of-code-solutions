@@ -2,7 +2,6 @@
 #include <typeindex>
 #include <unordered_map>
 #include <utility>
-#include <vcruntime_typeinfo.h>
 
 namespace detail
 {

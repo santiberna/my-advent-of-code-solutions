@@ -1,5 +1,5 @@
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
 
 REGISTER_CHALLENGE(Y2015_C1_Stairs, "input/Y2015/C1.txt")
 {

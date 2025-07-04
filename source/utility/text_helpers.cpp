@@ -1,5 +1,5 @@
-#include "TextHelpers.hpp"
-#include "Utility/Array2D.hpp"
+#include "utility/text_helpers.hpp"
+#include "utility/array_2D.hpp"
 #include <cstddef>
 #include <cstdint>
 #include <string_view>

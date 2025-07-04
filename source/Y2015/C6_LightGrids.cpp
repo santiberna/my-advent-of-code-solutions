@@ -1,6 +1,7 @@
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Math.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+
+#include <utility/math.hpp>
 #include <cstdint>
 #include <vector>
 

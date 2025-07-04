@@ -1,5 +1,6 @@
-#include <Utility/MD5Hash.hpp>
-#include <common.hpp>
+#include <utility/MD5_hash.hpp>
+#include <utility/challenge_runner.hpp>
+
 #include <string>
 
 // This challenge is disabled because it takes too long

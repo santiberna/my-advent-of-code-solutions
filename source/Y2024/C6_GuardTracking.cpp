@@ -1,10 +1,10 @@
-#include "Utility/Array2D.hpp"
-#include <common.hpp>
+#include "utility/array_2D.hpp"
+#include "utility/challenge_runner.hpp"
+
+#include <utility/text_helpers.hpp>
 #include <glm/glm.hpp>
 #include <iostream>
-#include <Utility/TextHelpers.hpp>
 #include <cstdint>
-#include <Utility/Log.hpp>
 
 enum PathDirection : uint8_t
 {

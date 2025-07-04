@@ -1,12 +1,9 @@
-#include <Utility/Math.hpp>
-#include <string>
-#include <Utility/TextHelpers.hpp>
-#include <common.hpp>
+#include <utility/math.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+
 #include <vector>
 #include <cassert>
-#include <bit>
-#include <Utility/Log.hpp>
-#include <Utility/Timer.hpp>
 
 struct Values
 {
@@ -90,7 +87,7 @@ REGISTER_CHALLENGE_DISABLED(Y2024_C7_Operators, "input/Y2024/C7.txt")
     std::vector<Values> failed {};
 
     {
-        PROFILE_SCOPE();
+        // PROFILE_SCOPE();
         for (size_t i = 0; i < equations.size(); i++)
         {
             auto& v = equations.at(i);
@@ -109,7 +106,7 @@ REGISTER_CHALLENGE_DISABLED(Y2024_C7_Operators, "input/Y2024/C7.txt")
     }
 
     {
-        PROFILE_SCOPE();
+        // PROFILE_SCOPE();
         for (auto& v : failed)
         {
             int64_t p2 {};

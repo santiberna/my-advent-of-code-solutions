@@ -1,7 +1,7 @@
 #include <glm/glm.hpp>
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Array2D.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+#include <Utility/array_2D.hpp>
 
 void EvaluatePathRecursive(int64_t& out, glm::ivec2 position, Array2D<int>& grid, bool overwrite)
 {

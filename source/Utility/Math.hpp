@@ -11,6 +11,26 @@ inline glm::ivec2 TurnVec2(const glm::vec2& rot, bool clockwise)
     return { rot.y, -rot.x };
 }
 
+int intSign(int val)
+{
+    return (0 < val) - (val < 0);
+}
+
+struct IVec2
+{
+    int x {}, y {};
+
+    IVec2 operator+(const IVec2& other) const
+    {
+        return { x + other.x, y + other.y };
+    }
+
+    IVec2 operator-(const IVec2& other) const
+    {
+        return { x - other.x, y - other.y };
+    }
+};
+
 inline int64_t PowInt(int64_t x, int64_t y)
 {
     int64_t out = 1;

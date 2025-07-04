@@ -1,5 +1,6 @@
-#include "Utility/TextHelpers.hpp"
-#include <common.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+
 #include <vector>
 
 REGISTER_CHALLENGE_DISABLED(Y2017_C1, "input/Y2017/C1.txt")

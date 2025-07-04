@@ -1,5 +1,5 @@
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
 #include <cstdint>
 #include <sstream>
 #include <string>
@@ -32,7 +32,7 @@ struct Operation
     int64_t operand {};
 };
 
-REGISTER_CHALLENGE(Y2024_CH, "input/Y2024/C17.txt")
+REGISTER_CHALLENGE_DISABLED(Y2024_CH, "input/Y2024/C17.txt")
 {
     VM_State state {};
     std::vector<Operation> operations {};

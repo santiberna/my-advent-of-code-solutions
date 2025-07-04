@@ -1,6 +1,7 @@
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Math.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+
+#include <Utility/math.hpp>
 #include <unordered_set>
 
 REGISTER_CHALLENGE(Y2015_C3_HouseDelivery, "input/Y2015/C3.txt")

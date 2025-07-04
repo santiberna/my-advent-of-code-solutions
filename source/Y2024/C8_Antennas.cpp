@@ -2,8 +2,8 @@
 #include "glm/common.hpp"
 #include "glm/geometric.hpp"
 #include <glm/glm.hpp>
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
 #include <unordered_map>
 #include <Utility/Math.hpp>
 #include <unordered_map>

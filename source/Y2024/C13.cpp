@@ -1,18 +1,14 @@
-#include "Utility/Log.hpp"
-#include "glm/common.hpp"
-#include "glm/fwd.hpp"
 #include <cassert>
 #include <cstdint>
 #include <glm/glm.hpp>
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
 #include <iostream>
-#include <limits.h>
 #include <algorithm>
 #include <numeric>
 #include <optional>
 #include <vector>
-#include <Utility/Math.hpp>
+#include <utility/math.hpp>
 
 // 10000000000000
 

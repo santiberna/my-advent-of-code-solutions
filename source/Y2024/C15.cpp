@@ -1,9 +1,7 @@
-#include "Utility/Array2D.hpp"
-#include "Utility/Log.hpp"
-#include "glm/fwd.hpp"
+#include <utility/array_2D.hpp>
 #include <cassert>
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
 #include <queue>
 #include <vector>
 #include <glm/glm.hpp>
@@ -204,10 +202,6 @@ REGISTER_CHALLENGE_DISABLED(Y2024_CF, "input/Y2024/C15.txt")
             pos2 += step;
             map2 = copy;
         }
-
-        //*copy(pos2.x, pos2.y) = '@';
-        // copy.Print();
-        Log::Debug("{}", i++);
     }
 
     int64_t answer1 {}, answer2 {};

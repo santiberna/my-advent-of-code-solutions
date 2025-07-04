@@ -1,6 +1,6 @@
-#include <common.hpp>
-#include <Utility/Timer.hpp>
-#include <Utility/Log.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/timer.hpp>
+#include <utility/log.hpp>
 #include <ostream>
 
 void RunChallengeImpl(const std::string& name, std::ostream& out, Challenge* challenge, const Input& input)

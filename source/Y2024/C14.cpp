@@ -1,13 +1,9 @@
-#include "Utility/Array2D.hpp"
-#include "Utility/Log.hpp"
-#include "glm/fwd.hpp"
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Math.hpp>
-#include <thread>
+#include <utility/array_2D.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+#include <utility/Math.hpp>
 #include <unordered_set>
 #include <vector>
-#include <chrono>
 #include <array>
 
 REGISTER_CHALLENGE_DISABLED(Y2024_CE, "input/Y2024/C14.txt")
@@ -125,9 +121,6 @@ REGISTER_CHALLENGE_DISABLED(Y2024_CE, "input/Y2024/C14.txt")
             *grid(p.x, p.y) = '#';
         }
 
-        Log::Debug("");
-        Log::Debug("");
-        Log::Debug("Render: {}", i);
         grid.Print();
         break;
         // std::this_thread::sleep_for(std::chrono::milliseconds(10));

@@ -1,9 +1,7 @@
 #include <glm/glm.hpp>
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Array2D.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Log.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+#include <utility/log.hpp>
 
 REGISTER_CHALLENGE_DISABLED(Y2024_C4_MatchXMAS, "input/Y2024/C4.txt")
 {

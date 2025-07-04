@@ -1,10 +1,10 @@
 #include "Utility/Log.hpp"
 #include "glm/fwd.hpp"
 #include <glm/glm.hpp>
-#include <common.hpp>
-#include <Utility/TextHelpers.hpp>
-#include <Utility/Array2D.hpp>
-#include <Utility/Math.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+#include <Utility/array_2D.hpp>
+#include <Utility/math.hpp>
 #include <ostream>
 #include <string>
 #include <unordered_map>

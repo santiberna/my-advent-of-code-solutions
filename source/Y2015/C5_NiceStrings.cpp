@@ -1,5 +1,6 @@
-#include <Utility/TextHelpers.hpp>
-#include <common.hpp>
+#include <utility/challenge_runner.hpp>
+#include <utility/text_helpers.hpp>
+
 #include <cassert>
 #include <cstdint>
 #include <string>
