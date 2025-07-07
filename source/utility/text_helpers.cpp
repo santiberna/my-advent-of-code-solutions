@@ -1,7 +1,6 @@
-#include "utility/text_helpers.hpp"
-#include "utility/array_2D.hpp"
+#include <utility/text_helpers.hpp>
+#include <utility/array_2D.hpp>
 #include <cstddef>
-#include <cstdint>
 #include <string_view>
 
 std::optional<std::ifstream> TextHelpers::OpenFileReadStream(const std::filesystem::path& path, std::ios_base::openmode flags)
@@ -113,7 +112,7 @@ Array2D<char> TextHelpers::StreamToGrid(std::istream& stream)
     {
         for (size_t i = 0; i < width; i++)
         {
-            *out(i, j) = lines[j][i];
+            out.at(i, j) = lines[j][i];
         }
     }
 

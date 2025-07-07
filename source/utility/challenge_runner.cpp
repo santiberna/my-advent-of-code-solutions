@@ -1,15 +1,23 @@
 #include <utility/challenge_runner.hpp>
 #include <utility/timer.hpp>
-#include <utility/log.hpp>
 #include <ostream>
 
 void RunChallengeImpl(const std::string& name, std::ostream& out, Challenge* challenge, const Input& input)
 {
     Stopwatch t {};
-    out << Log::Format("Running Challenge {}...\n", name);
+    out << "Running Challenge "
+        << name
+        << "...\n";
+
     auto answer = challenge(input);
-    out << Log::Format("Answer Part 1: {}\n Answer Part 2: {}\n", answer.first, answer.second);
-    out << Log::Format("Challenge {} complete! (Took {:.2f} milliseconds)\n\n", name, t.GetElapsed().count());
+
+    out << "Answer Part 1: "
+        << answer.first << "\n"
+        << "Answer Part 2: "
+        << answer.second << "\n";
+
+    out << "Challenge " << name << " complete! "
+        << "(Took " << t.GetElapsed().count() << " milliseconds)\n\n";
 }
 
 ChallengeRunner& ChallengeRunner::Get()

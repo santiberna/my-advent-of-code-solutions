@@ -9,17 +9,12 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS
     #"Y2017/*.cpp"
     #"Y2018/*.cpp"
     "Y2019/*.cpp"
-    "Y2020/*.cpp"
-    "Y2021/*.cpp"
-    "Y2022/*.cpp"
-    "Y2023/*.cpp"
+    #"Y2020/*.cpp"
+    #"Y2021/*.cpp"
+    #"Y2022/*.cpp"
+    #"Y2023/*.cpp"
     #"Y2024/*.cpp" 
     "main.cpp"
 )
 
 target_sources(Challenges PRIVATE ${sources})
-
-target_link_libraries(Challenges PUBLIC
-    glm::glm
-)
-

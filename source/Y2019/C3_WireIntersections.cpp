@@ -1,13 +1,13 @@
-#include "utility/log.hpp"
 #include "utility/array_2d.hpp"
 #include <algorithm>
-#include <cstdlib>
 #include <istream>
 #include <utility/challenge_runner.hpp>
 #include <utility/text_helpers.hpp>
 #include <utility/math.hpp>
 #include <sstream>
 #include <vector>
+
+using IVec2 = math::Vec2<int>;
 
 std::vector<IVec2> parse_line(std::istream& line)
 {
@@ -73,18 +73,18 @@ REGISTER_CHALLENGE(Y2019_C3, "input/Y2019/C3.txt")
 
     for (auto direction : line1)
     {
-        for (int i = 0; i != direction.x; i += intSign(direction.x))
+        for (int i = 0; i != direction.x; i += math::sign(direction.x))
         {
             steps++;
-            position.x += intSign(direction.x);
-            *grid(position.x, position.y) = steps;
+            position.x += math::sign(direction.x);
+            grid.at(position.x, position.y) = steps;
         }
 
-        for (int j = 0; j != direction.y; j += intSign(direction.y))
+        for (int j = 0; j != direction.y; j += math::sign(direction.y))
         {
             steps++;
-            position.y += intSign(direction.y);
-            *grid(position.x, position.y) = steps;
+            position.y += math::sign(direction.y);
+            grid.at(position.x, position.y) = steps;
         }
     }
 
@@ -102,27 +102,27 @@ REGISTER_CHALLENGE(Y2019_C3, "input/Y2019/C3.txt")
 
     for (auto direction : line2)
     {
-        for (int i = 0; i != direction.x; i += intSign(direction.x))
+        for (int i = 0; i != direction.x; i += math::sign(direction.x))
         {
             steps++;
-            position.x += intSign(direction.x);
+            position.x += math::sign(direction.x);
 
-            if (*grid(position.x, position.y) != 0)
+            if (grid.at(position.x, position.y) != 0)
             {
                 intersection_distances.emplace_back(calc_distance(IVec2 { ARRAY_WIDTH / 2, ARRAY_HEIGHT / 2 }, position));
-                intersection_steps.emplace_back(steps + *grid(position.x, position.y));
+                intersection_steps.emplace_back(steps + grid.at(position.x, position.y));
             }
         }
 
-        for (int j = 0; j != direction.y; j += intSign(direction.y))
+        for (int j = 0; j != direction.y; j += math::sign(direction.y))
         {
             steps++;
-            position.y += intSign(direction.y);
+            position.y += math::sign(direction.y);
 
-            if (*grid(position.x, position.y) != 0)
+            if (grid.at(position.x, position.y) != 0)
             {
                 intersection_distances.emplace_back(calc_distance(IVec2 { ARRAY_WIDTH / 2, ARRAY_HEIGHT / 2 }, position));
-                intersection_steps.emplace_back(steps + *grid(position.x, position.y));
+                intersection_steps.emplace_back(steps + grid.at(position.x, position.y));
             }
         }
     }

@@ -1,6 +1,6 @@
 #pragma once
 #include <chrono>
-#include <Utility/Log.hpp>
+#include <iostream>
 
 using DeltaMS = std::chrono::duration<float, std::milli>;
 
@@ -18,14 +18,17 @@ private:
 class ScopedTimer
 {
 public:
-    ScopedTimer(const char* name)
+    ScopedTimer(const std::string& name)
         : name(name)
     {
     }
-    ~ScopedTimer() { Log::Debug("{}: {}ms", name, watch.GetElapsed().count()); }
+    
+    ~ScopedTimer() { 
+        std::cout << "--- PROFILE RESULT (" << name << "): " << watch.GetElapsed().count() << "ms\n";
+    }
 
 private:
-    const char* name {};
+    std::string name {};
     Stopwatch watch {};
 };
 

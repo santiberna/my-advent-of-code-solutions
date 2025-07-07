@@ -5,5 +5,4 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(AdventOfCodeSolutions)
 
 # CODE
-add_subdirectory(third-party)
 add_subdirectory(source)
