@@ -1,6 +1,6 @@
-#include "utility/array_2d.hpp"
 #include <algorithm>
 #include <istream>
+#include <optional>
 #include <utility/challenge_runner.hpp>
 #include <utility/text_helpers.hpp>
 #include <utility/math.hpp>
@@ -9,36 +9,77 @@
 
 using IVec2 = math::Vec2<int>;
 
+struct Line
+{
+    IVec2 start {};
+    IVec2 end {};
+};
+
+std::optional<IVec2> findIntersect(const Line& a, const Line& b)
+{
+    // Detect vertical and horizontal segments
+    bool aVertical = (a.start.x == a.end.x);
+    bool bVertical = (b.start.x == b.end.x);
+
+    // Only handle one vertical and one horizontal segment
+    if (aVertical == bVertical)
+    {
+        return std::nullopt;
+    }
+
+    // Assign vertical/horizontal segments
+    const Line& vert = aVertical ? a : b;
+    const Line& hori = aVertical ? b : a;
+
+    int vx = vert.start.x;
+    int hy = hori.start.y;
+
+    int vyMin = std::min(vert.start.y, vert.end.y);
+    int vyMax = std::max(vert.start.y, vert.end.y);
+    int hxMin = std::min(hori.start.x, hori.end.x);
+    int hxMax = std::max(hori.start.x, hori.end.x);
+
+    if (vx >= hxMin && vx <= hxMax && hy >= vyMin && hy <= vyMax)
+    {
+        return IVec2 { vx, hy };
+    }
+
+    return std::nullopt; // No intersection
+}
+
 std::vector<IVec2> parse_line(std::istream& line)
 {
-    std::vector<IVec2> ret;
+    IVec2 start {};
+    std::vector<IVec2> ret { start };
+
     auto lines = TextHelpers::SplitStreamIntoLines(line, ',');
 
     for (auto& line : lines)
     {
         auto first = line.front();
         auto num = TextHelpers::ParseNumber<int>({ line.begin() + 1, line.end() }).value().first;
-        IVec2 out {};
+        IVec2 vec {};
 
         switch (first)
         {
         case 'R':
-            out.x = +num;
+            vec.x = +num;
             break;
         case 'L':
-            out.x = -num;
+            vec.x = -num;
             break;
         case 'U':
-            out.y = -num;
+            vec.y = -num;
             break;
         case 'D':
-            out.y = +num;
+            vec.y = +num;
             break;
         default:
             throw;
         }
 
-        ret.emplace_back(out);
+        start += vec;
+        ret.emplace_back(start);
     }
 
     return ret;
@@ -64,71 +105,40 @@ REGISTER_CHALLENGE(Y2019_C3, "input/Y2019/C3.txt")
         line2 = parse_line(second);
     }
 
-    constexpr int ARRAY_WIDTH = 20000;
-    constexpr int ARRAY_HEIGHT = 20000;
+    std::vector<int64_t> intersection_distances {}, intersection_lengths {};
 
-    Array2D<int> grid { ARRAY_WIDTH, ARRAY_HEIGHT, 0 };
-    auto position = IVec2 { ARRAY_WIDTH / 2, ARRAY_HEIGHT / 2 };
-    int steps = 0;
+    size_t line1_progress {};
 
-    for (auto direction : line1)
+    for (size_t i = 0; i < line1.size() - 1; ++i)
     {
-        for (int i = 0; i != direction.x; i += math::sign(direction.x))
+        Line segment1 = { line1.at(i), line1.at(i + 1) };
+
+        size_t line2_progress {};
+
+        for (size_t j = 0; j < line2.size() - 1; ++j)
         {
-            steps++;
-            position.x += math::sign(direction.x);
-            grid.at(position.x, position.y) = steps;
+            Line segment2 = { line2.at(j), line2.at(j + 1) };
+
+            if (auto intersect = findIntersect(segment1, segment2))
+            {
+                auto dist1 = math::manhattan_distance(*intersect - segment1.start);
+                auto dist2 = math::manhattan_distance(*intersect - segment2.start);
+
+                intersection_distances.emplace_back(math::manhattan_distance(*intersect));
+                intersection_lengths.emplace_back(dist1 + dist2 + line1_progress + line2_progress);
+            }
+
+            line2_progress += math::manhattan_distance(segment2.start - segment2.end);
         }
 
-        for (int j = 0; j != direction.y; j += math::sign(direction.y))
-        {
-            steps++;
-            position.y += math::sign(direction.y);
-            grid.at(position.x, position.y) = steps;
-        }
+        line1_progress += math::manhattan_distance(segment1.start - segment1.end);
     }
 
-    steps = 0;
-    position = IVec2 { ARRAY_WIDTH / 2, ARRAY_HEIGHT / 2 };
-
-    auto calc_distance = [](const IVec2& a, const IVec2& b)
-    {
-        auto distance = a - b;
-        return std::labs(distance.x) + std::labs(distance.y);
-    };
-
-    std::vector<int> intersection_distances;
-    std::vector<int> intersection_steps;
-
-    for (auto direction : line2)
-    {
-        for (int i = 0; i != direction.x; i += math::sign(direction.x))
-        {
-            steps++;
-            position.x += math::sign(direction.x);
-
-            if (grid.at(position.x, position.y) != 0)
-            {
-                intersection_distances.emplace_back(calc_distance(IVec2 { ARRAY_WIDTH / 2, ARRAY_HEIGHT / 2 }, position));
-                intersection_steps.emplace_back(steps + grid.at(position.x, position.y));
-            }
-        }
-
-        for (int j = 0; j != direction.y; j += math::sign(direction.y))
-        {
-            steps++;
-            position.y += math::sign(direction.y);
-
-            if (grid.at(position.x, position.y) != 0)
-            {
-                intersection_distances.emplace_back(calc_distance(IVec2 { ARRAY_WIDTH / 2, ARRAY_HEIGHT / 2 }, position));
-                intersection_steps.emplace_back(steps + grid.at(position.x, position.y));
-            }
-        }
-    }
+    intersection_distances.erase(intersection_distances.begin());
+    intersection_lengths.erase(intersection_lengths.begin());
 
     int64_t answer1 = *std::min_element(intersection_distances.begin(), intersection_distances.end());
-    int64_t answer2 = *std::min_element(intersection_steps.begin(), intersection_steps.end());
+    int64_t answer2 = *std::min_element(intersection_lengths.begin(), intersection_lengths.end());
 
     return { answer1, answer2 };
 }

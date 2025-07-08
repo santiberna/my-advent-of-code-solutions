@@ -39,6 +39,12 @@ IntType numDigits(IntType num)
     return out;
 }
 
+template<typename IntType>
+IntType divUp(IntType a, IntType b)
+{
+    return (a + b - 1) / b;
+}
+
 inline bool floatEq(float a, float b, float eps = 1e-5f)
 {
     return std::abs(a - b) < eps;
@@ -173,105 +179,6 @@ T manhattan_distance(const Vec3<T>& v)
 
 };
 
-// inline int intSign(int val)
-// {
-//     return (0 < val) - (val < 0);
-// }
-
-// struct IVec2
-// {
-//     int x {}, y {};
-
-//     IVec2 operator+(const IVec2& other) const
-//     {
-//         return { x + other.x, y + other.y };
-//     }
-
-//     IVec2 operator-(const IVec2& other) const
-//     {
-//         return { x - other.x, y - other.y };
-//     }
-// };
-
-// inline int64_t PowInt(int64_t x, int64_t y)
-// {
-//     int64_t out = 1;
-//     while (y--)
-//     {
-//         out *= x;
-//     }
-//     return out;
-// }
-
-// inline int64_t NumDigits(int64_t x)
-// {
-//     int64_t out = 0;
-
-//     while (x)
-//     {
-//         out++;
-//         x /= 10;
-//     }
-
-//     return out;
-// }
-
-// inline float length(const std::pair<float, float>& v)
-// {
-//     return std::sqrtf(v.first * v.first + v.second * v.second);
-// }
-
-// inline std::pair<float, float> normalize(const std::pair<float, float>& v)
-// {
-//     auto l = length(v);
-//     return { v.first / l, v.second / l};
-// }
-
-// inline float dot_product(const std::pair<float, float>& v, const std::pair<float, float>& u)
-// {
-//     return v.first * u.first + v.second * u.second;
-// }
-
-// inline float cross_product(const std::pair<float, float>& v, const std::pair<float, float>& u)
-// {
-//     return v.first * u.second - v.second * u.first; 
-// }
-
-// inline bool float_eq(float a, float b, float eps = 1e-5f)
-// {
-//     return std::abs(a - b) < eps;
-// }
-
-// // double
-
-// inline double length(const std::pair<double, double>& v)
-// {
-//     return std::sqrt(v.first * v.first + v.second * v.second);
-// }
-
-// inline std::pair<double, double> normalize(const std::pair<double, double>& v)
-// {
-//     auto l = length(v);
-//     return { v.first / l, v.second / l};
-// }
-
-// inline double dot_product(const std::pair<double, double>& v, const std::pair<double, double>& u)
-// {
-//     return v.first * u.first + v.second * u.second;
-// }
-
-// inline double cross_product(const std::pair<double, double>& v, const std::pair<double, double>& u)
-// {
-//     return v.first * u.second - v.second * u.first; 
-// }
-
-// inline bool double_eq(double a, double b, double eps = 1e-9f)
-// {
-//     return std::abs(a - b) < eps;
-// }
-
-// Hash functions for math types:
-
 namespace std
 {
 
@@ -306,10 +213,3 @@ struct hash<math::Vec3<T>>
 };
 
 }
-
-// template <typename T, typename U>
-// std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p)
-// {
-//     os << "(" << p.first << ", " << p.second << ")";
-//     return os;
-// }

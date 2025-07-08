@@ -191,8 +191,11 @@ std::ostream& operator<<(std::ostream& os, const Array2D<T>& p)
 {
     for (size_t j = 0; j < p.getHeight(); ++j)
     {
-        std::string_view row_string = { &p.at(0, j), p.getWidth() };
-        os << row_string << "\n";
+        for (size_t i = 0; i < p.getHeight(); ++i)
+        {
+            os << p.at(i, j) << ' ';
+        }
+        os << "\n";
     }
     return os;
 }
