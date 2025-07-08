@@ -1,3 +1,4 @@
+#include "utility/timer.hpp"
 #include <algorithm>
 #include <array>
 #include <cstdint>
@@ -26,19 +27,6 @@ int64_t getFirstDigits(const std::vector<int64_t>& vec, int64_t n)
     return std::atoll(num.c_str());
 }
 
-void process_message(std::vector<int64_t>& out, const std::vector<int64_t>& in)
-{
-    for (size_t i = 0; i < in.size(); i++)
-    {
-        int64_t sum = 0;
-        for (size_t j = i; j < in.size(); j++)
-        {
-            sum += sample_phase_pattern(i + 1, j) * in[j];
-        }
-        out.at(i) = std::abs(sum % 10);
-    }
-}
-
 REGISTER_CHALLENGE(Y2019_CH, "input/Y2019/C16.txt")
 {
     std::vector<int64_t> digits {};
@@ -56,13 +44,20 @@ REGISTER_CHALLENGE(Y2019_CH, "input/Y2019/C16.txt")
     int64_t answer1 {}, answer2 {};
 
     { // Part 1
+
         std::vector<int64_t> current_digits = digits;
-        std::vector<int64_t> next_digits(current_digits.size());
 
         for (size_t i = 0; i < 100; i++)
         {
-            process_message(next_digits, current_digits);
-            current_digits = next_digits;
+            for (size_t i = 0; i < current_digits.size(); i++)
+            {
+                int64_t sum = 0;
+                for (size_t j = i; j < current_digits.size(); j++)
+                {
+                    sum += sample_phase_pattern(i + 1, j) * current_digits[j];
+                }
+                current_digits.at(i) = std::abs(sum % 10);
+            }
         }
 
         answer1 = getFirstDigits(current_digits, 8);
@@ -84,10 +79,13 @@ REGISTER_CHALLENGE(Y2019_CH, "input/Y2019/C16.txt")
 
         for (size_t i = 0; i < 100; i++)
         {
+            int64_t sum = current_digits.back();
+
             // Sum of all elements from the end, no need to sample phase
             for (int64_t i = digit_count - 2; i >= 0; i--)
             {
-                current_digits.at(i) = (current_digits.at(i) + current_digits.at(i + 1)) % 10;
+                sum += current_digits.at(i);
+                current_digits.at(i) = sum % 10;
             }
         }
 
