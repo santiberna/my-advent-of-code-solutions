@@ -6,6 +6,8 @@
 #include <fstream>
 #include <string>
 #include <functional>
+#include <iostream>
+#include <vector>
 
 namespace TextHelpers
 {
@@ -36,4 +38,18 @@ template <typename T>
 std::vector<T> ParseAllNumbers(const std::string& str);
 
 Array2D<char> StreamToGrid(std::istream& stream);
+}
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec)
+{
+    os << "[";
+    for (size_t i = 0; i < vec.size(); ++i)
+    {
+        os << vec[i];
+        if (i != vec.size() - 1)
+            os << ", ";
+    }
+    os << "]";
+    return os;
 }

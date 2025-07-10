@@ -2,7 +2,7 @@
 #include "utility/math.hpp"
 #include <cassert>
 #include <cstdint>
-#include <iostream>
+#include <stack>
 #include <queue>
 #include <utility/challenge_runner.hpp>
 #include <utility/text_helpers.hpp>

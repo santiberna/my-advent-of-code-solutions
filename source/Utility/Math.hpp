@@ -60,11 +60,11 @@ struct Vec2 {
 
     T x{}, y{};
 
-    Vec2() = default;
-    Vec2(T x_, T y_) : x(x_), y(y_) {}
+    constexpr Vec2() = default;
+    constexpr Vec2(T x_, T y_) : x(x_), y(y_) {}
 
     template<typename U>
-    Vec2(const Vec2<U>& o) : x(o.x), y(o.y) {}
+    constexpr Vec2(const Vec2<U>& o) : x(o.x), y(o.y) {}
 
     Vec2 operator-() const { return Vec2{-x, -y}; }
 
@@ -91,11 +91,11 @@ struct Vec3
 {
     T x{}, y{}, z{};
 
-    Vec3() = default;
-    Vec3(T x_, T y_, T z_) : x(x_), y(y_), z(z_) {}
+    constexpr Vec3() = default;
+    constexpr Vec3(T x_, T y_, T z_) : x(x_), y(y_), z(z_) {}
 
     template<typename U>
-    Vec3(const Vec3<U>& o) : x(o.x), y(o.y), z(o.z) {}
+    constexpr Vec3(const Vec3<U>& o) : x(o.x), y(o.y), z(o.z) {}
 
     Vec3 operator-() const { return {-x, -y, -z}; }
     Vec3 operator+(const Vec3& r) const { return {x + r.x, y + r.y, z + r.z}; }
@@ -175,6 +175,10 @@ template<typename T>
 T manhattan_distance(const Vec3<T>& v)
 {
     return std::abs(v.x) + std::abs(v.y) + std::abs(v.z);
+}
+
+inline void hash_combine(std::size_t& seed, std::size_t value) {
+    seed ^= value + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
 };

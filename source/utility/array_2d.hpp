@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <vector>
 #include <stdexcept>
 #include <string_view>
@@ -53,6 +54,8 @@ public:
 
     size_t getWidth() const { return width; }
     size_t getHeight() const { return height; }
+
+    void fill(const T& val);
 
     Array2DIterator<T> begin();
     Array2DIterator<T> end();
@@ -139,6 +142,12 @@ Array2D<T>::Array2D(size_t width, size_t height, const T& init)
 }
 
 template <typename T>
+void Array2D<T>::fill(const T& val)
+{
+    std::fill(data.begin(), data.end(), val);
+}
+
+template <typename T>
 T& Array2D<T>::at(size_t x, size_t y)
 {
     if (x >= width || y >= height)
@@ -191,7 +200,7 @@ std::ostream& operator<<(std::ostream& os, const Array2D<T>& p)
 {
     for (size_t j = 0; j < p.getHeight(); ++j)
     {
-        for (size_t i = 0; i < p.getHeight(); ++i)
+        for (size_t i = 0; i < p.getWidth(); ++i)
         {
             os << p.at(i, j) << ' ';
         }

@@ -1,33 +1,12 @@
 #pragma once
-#include <cstdint>
+
 #include <vector>
 #include <queue>
-#include <stack>
+#include <string>
+#include <optional>
 
 namespace ic
 {
-
-enum OpCode : int64_t
-{
-    NONE = 0,
-    ADD = 1,
-    MULTIPLY = 2,
-    MEMSET = 3,
-    RET = 4,
-    JIT = 5,
-    JIF = 6,
-    LESS = 7,
-    EQ = 8,
-    REL_OFF = 9,
-    STOP = 99
-};
-
-enum AddressMode : int64_t
-{
-    ADDRESS,
-    IMMEDIATE,
-    RELATIVE
-};
 
 enum ExitCode : int64_t
 {
@@ -36,17 +15,12 @@ enum ExitCode : int64_t
     WAITING_INPUT
 };
 
-struct Operation
-{
-    OpCode code {};
-    int64_t stride {};
-    AddressMode parameter_mode1 {};
-    AddressMode parameter_mode2 {};
-    AddressMode parameter_mode3 {};
-};
+constexpr size_t DEFAULT_MEMORY_REQUIREMENTS = 1024 * 256; // 256 KB
 
 struct Program
 {
+    static std::optional<Program> fromFile(const std::string& path, size_t memory_req = DEFAULT_MEMORY_REQUIREMENTS);
+
     std::vector<int64_t> state {};
     std::vector<int64_t> outputs {};
     std::queue<int64_t> inputs {};

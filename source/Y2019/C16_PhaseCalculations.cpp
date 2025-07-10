@@ -27,7 +27,7 @@ int64_t getFirstDigits(const std::vector<int64_t>& vec, int64_t n)
     return std::atoll(num.c_str());
 }
 
-REGISTER_CHALLENGE(Y2019_CH, "input/Y2019/C16.txt")
+REGISTER_CHALLENGE(Y2019_CG, "input/Y2019/C16.txt")
 {
     std::vector<int64_t> digits {};
 

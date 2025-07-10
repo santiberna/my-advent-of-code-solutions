@@ -1,17 +1,50 @@
-#include "int_code.hpp"
+#include <cstddef>
+#include <optional>
 #include <utility/int_code.hpp>
+#include <utility/text_helpers.hpp>
 
 using namespace ic;
 
-int64_t getAddress(const Program& program, int64_t offset, ic::AddressMode mode)
+enum OpCode : int64_t
+{
+    NONE = 0,
+    ADD = 1,
+    MULTIPLY = 2,
+    MEMSET = 3,
+    RET = 4,
+    JIT = 5,
+    JIF = 6,
+    LESS = 7,
+    EQ = 8,
+    REL_OFF = 9,
+    STOP = 99
+};
+
+enum AddressMode : int64_t
+{
+    ADDRESS,
+    IMMEDIATE,
+    RELATIVE
+};
+
+struct Operation
+{
+    OpCode code {};
+    int64_t stride {};
+    AddressMode parameter_mode1 {};
+    AddressMode parameter_mode2 {};
+    AddressMode parameter_mode3 {};
+};
+
+int64_t getAddress(const Program& program, int64_t offset, AddressMode mode)
 {
     switch (mode)
     {
-    case ic::AddressMode::ADDRESS:
+    case AddressMode::ADDRESS:
     {
         return program.state.at(program.instruction_ptr + offset);
     }
-    case ic::AddressMode::RELATIVE:
+    case AddressMode::RELATIVE:
     {
         return program.state.at(program.instruction_ptr + offset) + program.relative_offset;
     }
@@ -20,20 +53,20 @@ int64_t getAddress(const Program& program, int64_t offset, ic::AddressMode mode)
     }
 }
 
-int64_t getOperand(const Program& program, int64_t offset, ic::AddressMode mode)
+int64_t getOperand(const Program& program, int64_t offset, AddressMode mode)
 {
     switch (mode)
     {
-    case ic::AddressMode::ADDRESS:
+    case AddressMode::ADDRESS:
     {
         auto address = program.state.at(program.instruction_ptr + offset);
         return program.state.at(address);
     }
-    case ic::AddressMode::IMMEDIATE:
+    case AddressMode::IMMEDIATE:
     {
         return program.state.at(program.instruction_ptr + offset);
     }
-    case ic::AddressMode::RELATIVE:
+    case AddressMode::RELATIVE:
     {
         auto address = program.state.at(program.instruction_ptr + offset);
         return program.state.at(address + program.relative_offset);
@@ -185,4 +218,21 @@ ExitCode ic::Program::run()
 
         executeOperation(*this, op_code);
     }
+}
+
+std::optional<Program> Program::fromFile(const std::string& path, size_t memory_req)
+{
+    ic::Program program;
+    auto stream = TextHelpers::OpenFileReadStream(path);
+
+    if (!stream)
+    {
+        return std::nullopt;
+    }
+
+    auto line = TextHelpers::StreamToString(stream.value());
+    program.state = TextHelpers::ParseAllNumbers<int64_t>(line);
+    program.state.resize(memory_req);
+
+    return program;
 }
